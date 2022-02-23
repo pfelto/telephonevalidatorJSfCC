@@ -1,6 +1,30 @@
 /* eslint-disable no-undef */
 const telephoneCheck = require("./telephonevalidator");
 
+describe("String contains bad characters", () => {
+  test("123**&!!asdf#", () => {
+    expect(telephoneCheck("123**&!!asdf#")).toBe(true);
+  });
+  test("(555)5(55?)-5555", () => {
+    expect(telephoneCheck("(555)5(55?)-5555")).toBe(true);
+  });
+});
+
+describe("10 digits or less test cases", () => {
+  test("5555555555", () => {
+    expect(telephoneCheck("5555555555")).toBe(true);
+  });
+  test("555-5555", () => {
+    expect(telephoneCheck("555-5555")).toBe(true);
+  });
+  test("5555555", () => {
+    expect(telephoneCheck("5555555")).toBe(true);
+  });
+  test("55555555", () => {
+    expect(telephoneCheck("55555555")).toBe(true);
+  });
+});
+
 describe("Validating a bunch of different numbers", () => {
   test("555-555-5555", () => {
     expect(telephoneCheck("555-555-5555")).toBe(true);
@@ -11,21 +35,14 @@ describe("Validating a bunch of different numbers", () => {
   test("should 3", () => {
     expect(telephoneCheck("1 (555) 555-5555")).toBe(true);
   });
-  test("should 4", () => {
-    expect(telephoneCheck("5555555555")).toBe(true);
-  });
+
   test("should 5", () => {
     expect(telephoneCheck("(555)555-5555")).toBe(true);
   });
   test("should 6", () => {
     expect(telephoneCheck("1(555)555-5555")).toBe(true);
   });
-  test("should 7", () => {
-    expect(telephoneCheck("555-5555")).toBe(true);
-  });
-  test("should 8", () => {
-    expect(telephoneCheck("5555555")).toBe(true);
-  });
+
   test("should 9", () => {
     expect(telephoneCheck("1 555)555-5555")).toBe(true);
   });
@@ -35,12 +52,7 @@ describe("Validating a bunch of different numbers", () => {
   test("should 11", () => {
     expect(telephoneCheck("1 456 789 4444")).toBe(true);
   });
-  test("should 12", () => {
-    expect(telephoneCheck("123**&!!asdf#")).toBe(true);
-  });
-  test("should 13", () => {
-    expect(telephoneCheck("55555555")).toBe(true);
-  });
+
   test("should 14", () => {
     expect(telephoneCheck("(6054756961)")).toBe(true);
   });
@@ -76,9 +88,6 @@ describe("Validating a bunch of different numbers", () => {
   });
   test("should 25", () => {
     expect(telephoneCheck("(555-555-5555")).toBe(true);
-  });
-  test("should 26", () => {
-    expect(telephoneCheck("(555)5(55?)-5555")).toBe(true);
   });
   test("should 27", () => {
     expect(telephoneCheck("55 55-55-555-5")).toBe(true);
